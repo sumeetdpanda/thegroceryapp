@@ -1,6 +1,8 @@
 package com.example.thegroceryapp;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ItemClickListener {
 
     RecyclerView recyclerView;
     List<ItemModel> itemList;
@@ -53,5 +55,12 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        adapter.setClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view, int pos) {
+        Toast.makeText(this, "You chose: " + itemList.get(pos).itemName, Toast.LENGTH_SHORT).show();
     }
 }
